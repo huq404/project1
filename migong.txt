@@ -1,0 +1,76 @@
+#include<stdio.h>
+int length;
+int a[10][10];
+int b[10][10];
+int min=0,step=0,s=0;
+void maze(int m,int n)
+{
+	if(m==length-2 && n==length-2)
+	{
+		if(s==0) 
+		{
+			min=step;
+		}
+		if(step<min)
+		{
+			min=step;
+		}
+		s++; 
+		return;
+	}
+	 
+	if(a[m][n]==0 && b[m][n]==0)
+	{
+		step++;
+		b[m][n]=1; 
+		maze(m+1,n);
+		
+		b[m][n]=0; 
+		step--;
+	}
+	if(a[m][n]==0 && b[m][n]==0) 
+	{
+	    step++; 
+		b[m][n]=1; 
+		maze(m-1,n); 
+		
+		b[m][n]=0;
+		step--;
+	}
+	if(a[m][n]==0 && b[m][n]==0)
+	{
+	    step++; 
+		b[m][n]=1; 
+		maze(m,n+1); 
+		
+		b[m][n]=0;
+		step--;
+	}
+	if(a[m][n]==0 && b[m][n]==0)
+	{
+	    step++;
+		b[m][n]=1; 
+		maze(m,n-1);
+		
+		b[m][n]=0;
+		step--;
+	}
+}
+int main()
+{
+	scanf("%d",&length); 
+	for(int c=0;c<length;c++)
+	{
+		for(int d=0;d<length;d++)
+		{
+			scanf("%d",&a[c][d]);
+		}
+	}
+	maze(1,1); 
+	if(min)  
+	printf("%d",min);
+	else
+	printf("No solution");
+	
+	
+}
